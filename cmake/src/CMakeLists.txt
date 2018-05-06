@@ -3,10 +3,6 @@ include(CheckTypeSize)
 check_type_size("long" SIZEOF_LONG)
 check_type_size("unsigned long" SIZEOF_ULONG)
 
-if(SIZEOF_ULONG LESS CMAKE_SIZEOF_VOID_P)
-	message(FATAL_ERROR "Check CodeVect::insertTree implementation, because sizeof(word_t) < sizeof(void*)!")
-endif()
-
 # Check system headers
 include(CheckIncludeFile)
 check_include_file(sys/mman.h HAVE_SYS_MMAN_H)
