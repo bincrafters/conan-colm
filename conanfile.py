@@ -41,12 +41,17 @@ class ColmConan(ConanFile):
             file = os.path.join(cmake_src_dir, item)
             shutil.copy(file, os.path.join(self._source_subfolder, "src"))
 
+    def _remove_headers(self):
+        for file in ["config.h", "defs.h", "version.h"]:
+            os.remove(os.path.join(self._source_subfolder, "src", file))
+
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
     def build(self):
+        self._remove_headers()
         self._copy_cmake_files()
         cmake = self._configure_cmake()
         cmake.build()
