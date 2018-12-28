@@ -7,7 +7,7 @@ from conans import ConanFile, CMake, tools
 
 class ColmConan(ConanFile):
     name = "colm"
-    version = "0.13.0.5"
+    version = "0.12.0"
     description = "Colm is a programming language designed for the analysis and transformation of computer languages"
     url = "https://github.com/bincrafters/conan-colm"
     homepage = "https://www.colm.net/open-source/colm/"
@@ -22,6 +22,7 @@ class ColmConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
+    _autotools = None
 
     def config_options(self):
         if self.settings.os == 'Windows':
@@ -29,7 +30,7 @@ class ColmConan(ConanFile):
 
     def source(self):
         source_url = "http://www.colm.net/files/colm/colm-"
-        sha256 = "33e624677176958eaad76ebe6c391a68a0b4728fec8cc039efa1316f525f408c"
+        sha256 = "7b545d74bd139f5c622975d243c575310af1e4985059a1427b6fdbb1fb8d6e4d"
         tools.get("{0}{1}.tar.gz".format(source_url, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
@@ -63,3 +64,5 @@ class ColmConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
+        if self.settings.os == "Linux":
+            self.cpp_info.libs.append("m")

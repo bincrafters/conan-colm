@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(colm
-	VERSION 0.13.0.5
+	VERSION 0.12.0
 	LANGUAGES C CXX)
 set(PROJECT_PUBDATE "May 2017")
 

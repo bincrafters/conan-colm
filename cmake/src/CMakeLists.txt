@@ -28,7 +28,7 @@ configure_file(colm-config.cmake.in ${_PACKAGE_NAME}-config.cmake @ONLY)
 # Runtime headers
 set(RUNTIME_HDR
 	bytecode.h debug.h pool.h input.h
-	pdarun.h map.h type.h tree.h struct.h program.h colm.h internal.h)
+	pdarun.h map.h tree.h program.h colm.h)
 
 # Buildtime headers stub
 foreach(_hdr ${RUNTIME_HDR} rtvector.h)
@@ -51,7 +51,7 @@ include(GNUInstallDirs)
 add_library(libcolm
 	map.c pdarun.c list.c input.c debug.c
 	codevect.c pool.c string.c tree.c iter.c
-    bytecode.c program.c struct.c commit.c)
+    bytecode.c program.c)
 
 target_include_directories(libcolm
 	PUBLIC
@@ -66,16 +66,15 @@ set_target_properties(libcolm PROPERTIES
 
 add_library(libprog
 	buffer.h bytecode.h colm.h debug.h dotgen.h fsmcodegen.h fsmgraph.h
-	input.h keyops.h map.h compiler.h
+	input.h keyops.h map.h
 	parsetree.h pcheck.h pdacodegen.h pdagraph.h pdarun.h pool.h redbuild.h
 	redfsm.h rtvector.h tree.h global.h colm.h parser.h cstring.h
-	internal.h
 	resolve.cc lookup.cc synthesis.cc parsetree.cc
 	fsmstate.cc fsmbase.cc fsmattach.cc fsmmin.cc
 	fsmgraph.cc pdagraph.cc pdabuild.cc pdacodegen.cc fsmcodegen.cc
 	redfsm.cc fsmexec.cc redbuild.cc closure.cc fsmap.cc
 	dotgen.cc pcheck.cc ctinput.cc declare.cc codegen.cc
-	exports.cc compiler.cc parser.cc reduce.cc)
+	exports.cc compiler.cc parser.cc)
 
 target_include_directories(libprog
 	PUBLIC

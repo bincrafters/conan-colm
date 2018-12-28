@@ -1,11 +1,10 @@
 #include <cstdlib>
+#include <iostream>
 
-#include "colm/colm.h"
-#include "colm/program.h"
+#include <colm/config.h>
 
-int main(int argc, const char* argv []) {
-    colm_program* program = new colm_program;
-    colm_set_debug(program, COLM_DBG_COMPILE);
-    colm_delete_program(program);
-    return EXIT_SUCCESS;
+
+int main() {
+	std::cout << "Colm version " << __VERSION__ << std::endl;
+	return EXIT_SUCCESS;
 }

@@ -11,4 +11,6 @@
 
 #cmakedefine SIZEOF_LONG @SIZEOF_LONG@
 
+#cmakedefine VERSION @VERSION@
+
 #endif /* _COLM_CONFIG_H */
