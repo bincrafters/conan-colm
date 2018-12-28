@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import shutil
-from conans import ConanFile, CMake, tools
+from conans import ConanFile, AutoToolsBuildEnvironment, CMake, tools
 
 
 class ColmConan(ConanFile):
@@ -51,18 +51,35 @@ class ColmConan(ConanFile):
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
+    def _configure_autotools(self):
+        if not self._autotools:
+            args = [ "--enable-shared=%s" % ("yes" if self.options.shared else "no"),
+                     "--enable-static=%s" % ("no" if self.options.shared else "yes"),
+                     "--with-pic=%s" % ("yes" if self.options.fPIC else "no") ]
+            self._autotools = AutoToolsBuildEnvironment(self, win_bash=tools.os_info.is_windows)
+            self._autotools.configure(args=args)
+        return self._autotools
+
     def build(self):
-        self._remove_headers()
-        self._copy_cmake_files()
-        cmake = self._configure_cmake()
-        cmake.build()
+        if self.settings.compiler == "Visual Studio":
+            self._remove_headers()
+            self._copy_cmake_files()
+            cmake = self._configure_cmake()
+            cmake.build()
+        else:
+            with tools.chdir(self._source_subfolder):
+                autotools = self._configure_autotools()
+                autotools.make()
 
     def package(self):
         self.copy(pattern="COPYING", dst="licenses", src=self._source_subfolder)
-        cmake = self._configure_cmake()
-        cmake.install()
+        if self.settings.compiler == "Visual Studio":
+            cmake = self._configure_cmake()
+            cmake.install()
+        else:
+            with tools.chdir(self._source_subfolder):
+                autotools = self._configure_autotools()
+                autotools.install()
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
-        if self.settings.os == "Linux":
-            self.cpp_info.libs.append("m")
