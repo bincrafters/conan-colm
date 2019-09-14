@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
 import shutil
 from conans import ConanFile, CMake, tools
@@ -7,7 +5,7 @@ from conans import ConanFile, CMake, tools
 
 class ColmConan(ConanFile):
     name = "colm"
-    version = "0.13.0.6"
+    version = "0.13.0.7"
     description = "Colm is a programming language designed for the analysis and transformation of computer languages"
     url = "https://github.com/bincrafters/conan-colm"
     homepage = "https://www.colm.net/open-source/colm/"
@@ -29,7 +27,7 @@ class ColmConan(ConanFile):
 
     def source(self):
         source_url = "http://www.colm.net/files/colm/colm-"
-        sha256 = "4644956dd82bedf3795bb1a6fdf9ee8bdd33bd1e7769ef81ffdaa3da70c5a349"
+        sha256 = "e43fa328ad7672f485848bf4f40ae498a1925ce5199f2d94e4828e13628ee638"
         tools.get("{0}{1}.tar.gz".format(source_url, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
