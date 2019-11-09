@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import os
 import shutil
 from conans import ConanFile, CMake, tools
@@ -11,7 +9,6 @@ class ColmConan(ConanFile):
     description = "Colm is a programming language designed for the analysis and transformation of computer languages"
     url = "https://github.com/bincrafters/conan-colm"
     homepage = "https://www.colm.net/open-source/colm/"
-    author = "Bincrafters <bincrafters@gmail.com>"
     topics = ("conan", "coml", "computation", "analysis", "transformation")
     license = "MIT"
     exports = ["LICENSE.md"]
