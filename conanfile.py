@@ -11,7 +11,6 @@ class ColmConan(ConanFile):
     homepage = "https://www.colm.net/open-source/colm/"
     topics = ("conan", "coml", "computation", "analysis", "transformation")
     license = "MIT"
-    exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt", "cmake/*"]
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
